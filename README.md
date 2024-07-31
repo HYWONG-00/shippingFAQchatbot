@@ -1,6 +1,7 @@
 # CodingAI - ProblemSolverGPT
 
 **!!! Please replace <YOUR_OPEN_API_KEY> in .env with your own OpenAI api key before running the program. Also, Please install node and npm before proceed.**
+
 ProblemSolverGPT, an AI-based web application with an elegant user interface utilizing advanced GPT-4 mini model API to provide programming language assistance, code translation, and more, making it a highly valuable tool for developers, including JavaScript and React expertise. GPT-4 mini is known for its advanced capability, cost-efficiency and performance compared to GPT-3.5-turbo which is highly recommended for chat conversation.
 
 
