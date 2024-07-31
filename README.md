@@ -6,17 +6,17 @@ ProblemSolverGPT, an AI-based web application with an elegant user interface uti
 
 ## Installation guide
 Inside client folder:
-npm install
+- npm install
 
 Inside server folder:
-npm init -y   (add new package.json)
-npm install 
+- npm init -y   (add new package.json)
+- npm install 
 
 ## To compile the code:
 To load the frontend web application:
-npm run dev
+- npm run dev
 
 To start the server:
-node server.js
+- node server.js
 
 
