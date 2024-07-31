@@ -3,7 +3,7 @@ import user from "./assets/user.svg";
 
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chat_container");
-
+const SERVER_PORT = 5000;
 let loadInterval;
 
 function loader(element){
@@ -82,8 +82,9 @@ const handleSubmit = async(e) => {
 
     loader(messageDiv);
 
+    
     //fetch data from server => get bot's response
-    const response = await fetch("http://localhost:5000", {
+    const response = await fetch(`http://localhost:${SERVER_PORT}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
