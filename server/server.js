@@ -20,15 +20,6 @@ app.use(cors());//to make those cross origin requests & allow server to be calle
 app.use(express.json());//to pass json from frontend to backend
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(express.static(path.join(__dirname, "../client"))); // or build folder
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/index.html"));
-});
-
 // app.get("/", async(req, res) => {
 //     res.status(200).send({
 //         message: "Hello from ProblemSolver",
@@ -76,6 +67,15 @@ app.post("/api/chat", async(req, res) => {
         console.error(error)
         res.status(500).send(error || 'Something went wrong');
   }
-})
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "../client"))); // or build folder
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/index.html"));
+});
 
 app.listen(port, () => console.log("Server is running on port http://localhost:5000"));
