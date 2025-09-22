@@ -2,6 +2,9 @@ import express from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
 import { OpenAI } from "openai";
+import { fileURLToPath } from "url";
+import path from "path";
+import fs from "fs"; 
 
 //to use dotenv variables
 dotenv.config();
@@ -36,20 +39,39 @@ app.post("/", async(req, res) => {
     try{
         const prompt = req.body.prompt;
         
-        const response = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: [{ role: "user", content: prompt }],
-            // stream: true,
-            temperature: 0, // higher values = model takes more risk, 0 as we want it answer what it knows
-            max_tokens: 2000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-            top_p: 1, // alternative to sampling with temperature, called nucleus sampling
-            frequency_penalty: 0.5, // -2.0 <= number <= 2.0. not going to repeat similar sentences too often
-            presence_penalty: 0, // -2.0 <= number <= 2.0. increasing the model's likelihood to talk about new topics.
-        });
-        
-        console.log("response", response);
-        res.status(200).send({
-            bot: response.choices[0].message.content
+        const context = "testing";
+
+        fs.readFile('faq.txt', 'utf8', async (err, data) => {
+            if (err) {
+                console.error('Error reading file:', err);
+                return res.status(500).send('Error reading file');
+            }
+
+            console.log("data", data)
+            const response = await openai.chat.completions.create({
+                model: "gpt-4o-mini",
+                messages: [
+                    {
+                    role: "system",
+                    content: `
+                        You are a helpful online shipping customer service AI chatbot that only answers questions based on provided FAQ documents with friendly tones.
+                        If the answer is not in the context, do NOT make up information. 
+                        Instead, politely say that you don’t have the information but offer to help with other questions.
+                    `
+                    },
+                    { role: "user", content: `Context: ${data}\n\nQuestion: ${prompt}` }],
+                // stream: true,
+                temperature: 0, // higher values = model takes more risk, 0 as we want it answer what it knows
+                max_tokens: 1000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
+                top_p: 1, // alternative to sampling with temperature, called nucleus sampling
+                frequency_penalty: 0.5, // -2.0 <= number <= 2.0. not going to repeat similar sentences too often
+                presence_penalty: 0, // -2.0 <= number <= 2.0. increasing the model's likelihood to talk about new topics.
+            });
+            
+            console.log("response", response);
+            res.status(200).send({
+                bot: response.choices[0].message.content
+            });
         });
 
   } catch (error) {
