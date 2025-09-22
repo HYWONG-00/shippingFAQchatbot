@@ -57,15 +57,18 @@ app.post("/api/chat", async(req, res) => {
                 presence_penalty: 0, // -2.0 <= number <= 2.0. increasing the model's likelihood to talk about new topics.
             });
             
-            console.log("response", response);
-            res.status(200).send({
-                bot: response.choices[0].message.content
+            // console.log("response", response);
+            res.json({
+                status: 200,
+                bot: data// response.choices[0].message.content
             });
         });
 
   } catch (error) {
         console.error(error)
-        res.status(500).send(error || 'Something went wrong');
+        res.json({
+            status: 500,
+            message: 'Something went wrong'});
   }
 });
 

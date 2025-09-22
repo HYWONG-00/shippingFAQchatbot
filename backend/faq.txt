@@ -1,0 +1,15 @@
+Q1: What is your return policy?
+A1: We offer a 30-day return policy on all items. To initiate a return, please visit our Returns Center and follow the instructions provided.
+
+Q2: How can I track my order?
+A2: Once your order has shipped, you will receive an email with tracking information. You can also track your order by logging into your account and visiting the 'My Orders' section.
+
+Q3: Do you offer international shipping?
+A3: Yes, we ship to over 50 countries worldwide. Shipping fees and delivery times vary depending on the destination.
+
+Q4: How can I contact customer support?
+A4: You can reach our customer support team via email at support@example.com
+ or by calling our toll-free number at 1-800-123-4567.
+
+Q5: What payment methods do you accept?
+A5: We accept all major credit cards, PayPal, and Apple Pay.

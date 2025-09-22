@@ -6,45 +6,44 @@ const chatContainer = document.querySelector("#chat_container");
 const SERVER_PORT = 5000;
 let loadInterval;
 
-function loader(element){
-    element.textContent="";
+function loader(element) {
+  element.textContent = "";
 
-    loadInterval = setInterval(() => {
-        // Update the text content of the loading indicator
-        element.textContent += '.';
+  loadInterval = setInterval(() => {
+    // Update the text content of the loading indicator
+    element.textContent += ".";
 
-        // If the loading indicator has reached three dots, reset it
-        if (element.textContent === '....') {
-            element.textContent = '';
-        }
-    }, 300);
+    // If the loading indicator has reached three dots, reset it
+    if (element.textContent === "....") {
+      element.textContent = "";
+    }
+  }, 300);
 }
 
-function typeText(element, text){
-    let index = 0;
+function typeText(element, text) {
+  let index = 0;
 
-    let interval = setInterval(() => {
-        if(index < text.length){
-            element.innerHTML += text.charAt(index);
-            index++;
-        }else{
-            //once finish typing,...
-            clearInterval(interval);
-        }
-    }, 20);
+  let interval = setInterval(() => {
+    if (index < text.length) {
+      element.innerHTML += text.charAt(index);
+      index++;
+    } else {
+      //once finish typing,...
+      clearInterval(interval);
+    }
+  }, 20);
 }
 
-function generateUID(){
-    const timestamp = Date.now();
-    const randomNum = Math.random();
-    const hexString = randomNum.toString(16);
+function generateUID() {
+  const timestamp = Date.now();
+  const randomNum = Math.random();
+  const hexString = randomNum.toString(16);
 
-    return `id-${timestamp}-${hexString}`;
+  return `id-${timestamp}-${hexString}`;
 }
 
-function chatStripe (isAi, value, uniqueID){
-    return (
-        `
+function chatStripe(isAi, value, uniqueID) {
+  return `
             <div class="wrapper ${isAi && "ai"}">
                 <div class="chat">
                     <div class="profile">
@@ -56,70 +55,72 @@ function chatStripe (isAi, value, uniqueID){
                     </div>
                 </div>
             </div>
-        `
-    )
+        `;
 }
 
-const handleSubmit = async(e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const data = new FormData(form);
+  const data = new FormData(form);
 
-    //user's chat stripe
-    chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+  //user's chat stripe
+  chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
 
-    form.reset();
+  form.reset();
 
-    //bot's chat stripe (AI is typing...)
-    const uniqueID = generateUID();
-    console.log({uniqueID: uniqueID});
-    chatContainer.innerHTML += chatStripe(true, " ", uniqueID);
+  //bot's chat stripe (AI is typing...)
+  const uniqueID = generateUID();
+  console.log({ uniqueID: uniqueID });
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueID);
 
-    //keep scrolling down when AI is typing...
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+  //keep scrolling down when AI is typing...
+  chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    const messageDiv = document.getElementById(uniqueID);
+  const messageDiv = document.getElementById(uniqueID);
 
-    loader(messageDiv);
+  loader(messageDiv);
 
-    
-    //fetch data from server => get bot's response
-    console.log("prompt", data.get("prompt"))
-    const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            prompt: data.get("prompt")
-        })
-    });
+  //fetch data from server => get bot's response
+  console.log("prompt", data.get("prompt"));
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prompt: data.get("prompt"),
+    }),
+  });
 
-    //stop loading
-    clearInterval(loadInterval);
-    messageDiv.innerHTML = "";
+  //stop loading
+  clearInterval(loadInterval);
+  messageDiv.innerHTML = "";
 
-    if(response.ok){
-        const data = await response.json();
-        const parsedData = data.bot.trim();
+  if (response.ok) {
+    const data = await response.json();
 
-        console.log({parsedData: parsedData});
+    if (data.status == 200) {
+      const parsedData = data.bot.trim();
 
-        typeText(messageDiv, parsedData);
+      console.log({ parsedData: parsedData });
+
+      typeText(messageDiv, parsedData);
+    } else {
+      console.log("Something went wrong");
     }
-    else{
-        const err = await response.text();
+  } else {
+    const err = await response.text();
 
-        messageDiv.innerHTML = "Something went wrong";
+    messageDiv.innerHTML = "Something went wrong";
 
-        alert(err);
-    }
-}
+    alert(err);
+  }
+};
 
 form.addEventListener("submit", handleSubmit);
 //when user hits "enter"
 form.addEventListener("keyup", (e) => {
-    if(e.keyCode === 13){
-        handleSubmit(e);
-    }
-})
+  if (e.keyCode === 13) {
+    handleSubmit(e);
+  }
+});

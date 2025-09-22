@@ -1,0 +1,90 @@
+/* Chat container */
+.chat-container {
+  width: 80vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  background: #343541;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Messages wrapper */
+.messages {
+  flex: 1;
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.messages::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual message */
+.message {
+  color: #dcdcdc;
+  font-size: 20px;
+  max-width: 100%;
+  white-space: pre-wrap;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.message.user {
+  background: #40414F;
+  align-self: flex-end;
+}
+
+.message.bot {
+  background: #10a37f;
+  align-self: flex-start;
+}
+
+/* Chat form */
+.chat-form {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+  background: #40414F;
+  border-radius: 5px;
+}
+
+/* Input inside the form */
+.chat-form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 18px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Submit button */
+.chat-form button {
+  width: 60px;
+  height: 40px;
+  background: #5436DA;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.chat-form button:disabled {
+  background: #777;
+  cursor: not-allowed;
+}

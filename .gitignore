@@ -1,4 +1,7 @@
 # Logs
+client/
+server/
+
 logs
 *.log
 npm-debug.log*
