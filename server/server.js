@@ -16,11 +16,21 @@ const app = express();
 app.use(cors());//to make those cross origin requests & allow server to be called from frontend
 app.use(express.json());//to pass json from frontend to backend
 
-app.get("/", async(req, res) => {
-    res.status(200).send({
-        message: "Hello from ProblemSolver",
-    })
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "../client")));
+
+app.get("/", (req, res) => {
+    // redirect to the index.html in client folder
+  res.sendFile(path.join(__dirname, "../client", "index.html"));
 });
+
+// app.get("/", async(req, res) => {
+//     res.status(200).send({
+//         message: "Hello from ProblemSolver",
+//     })
+// });
 
 app.post("/", async(req, res) => {
     try{
