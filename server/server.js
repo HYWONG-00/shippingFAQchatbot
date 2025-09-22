@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 //     })
 // });
 
-app.post("/", async(req, res) => {
+app.post("/api/chat", async(req, res) => {
     try{
         const prompt = req.body.prompt;
         
@@ -60,7 +60,7 @@ app.post("/", async(req, res) => {
                     { role: "user", content: `Context: ${data}\n\nQuestion: ${prompt}` }],
                 // stream: true,
                 temperature: 0, // higher values = model takes more risk, 0 as we want it answer what it knows
-                max_tokens: 1000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
+                max_tokens: 100, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
                 top_p: 1, // alternative to sampling with temperature, called nucleus sampling
                 frequency_penalty: 0.5, // -2.0 <= number <= 2.0. not going to repeat similar sentences too often
                 presence_penalty: 0, // -2.0 <= number <= 2.0. increasing the model's likelihood to talk about new topics.
