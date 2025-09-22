@@ -85,7 +85,7 @@ const handleSubmit = async(e) => {
     
     //fetch data from server => get bot's response
     console.log("prompt", data.get("prompt"))
-    const response = await fetch("/api/chat", {
+    const response = await fetch("https://problemsolver-p4gd.onrender.com", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

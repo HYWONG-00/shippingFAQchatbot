@@ -23,10 +23,10 @@ app.use(express.json());//to pass json from frontend to backend
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "../client/dist"))); // or build folder
+app.use(express.static(path.join(__dirname, "../client"))); // or build folder
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/index.html"));
 });
 
 // app.get("/", async(req, res) => {
@@ -35,7 +35,7 @@ app.get("*", (req, res) => {
 //     })
 // });
 
-app.post("/api/chat", async(req, res) => {
+app.post("/", async(req, res) => {
     try{
         const prompt = req.body.prompt;
         
