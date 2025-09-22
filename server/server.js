@@ -22,11 +22,11 @@ app.use(express.json());//to pass json from frontend to backend
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "../client")));
 
-app.get("/", (req, res) => {
-    // redirect to the index.html in client folder
-  res.sendFile(path.join(__dirname, "../client", "index.html"));
+app.use(express.static(path.join(__dirname, "../client/dist"))); // or build folder
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 // app.get("/", async(req, res) => {
