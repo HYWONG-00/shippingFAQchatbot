@@ -84,7 +84,8 @@ const handleSubmit = async(e) => {
 
     
     //fetch data from server => get bot's response
-    const response = await fetch(`http://localhost:${SERVER_PORT}`, {
+    console.log("prompt", data.get("prompt"))
+    const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

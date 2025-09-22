@@ -35,12 +35,10 @@ app.get("/", (req, res) => {
 //     })
 // });
 
-app.post("/", async(req, res) => {
+app.post("/api/chat", async(req, res) => {
     try{
         const prompt = req.body.prompt;
         
-        const context = "testing";
-
         fs.readFile('faq.txt', 'utf8', async (err, data) => {
             if (err) {
                 console.error('Error reading file:', err);
