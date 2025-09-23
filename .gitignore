@@ -1,6 +1,6 @@
 # Logs
-client/
-server/
+*client/
+*server/
 
 logs
 *.log
