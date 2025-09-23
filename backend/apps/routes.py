@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize OpenAI client
-print(os.getenv('OPENAI_API_KEY'))
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 api_bp = Blueprint('api', __name__)

@@ -24,8 +24,5 @@
     "globals": "^16.4.0",
     "react-error-overlay": "^6.0.9",
     "vite": "^7.1.7"
-  },
-  "overrides": {
-    "react-error-overlay": "6.0.9"
   }
 }
