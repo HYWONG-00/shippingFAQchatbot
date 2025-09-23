@@ -8,18 +8,18 @@ Shipping FAQ Chatbot, an AI-based web application with an elegant user interface
 
 
 ## Installation guide
-Inside client folder:
+Inside frontend folder:
 - npm install
+- npm run build (Optional, use to build dist/ which required for deployment later - Do it only when everything is done)
 
-Inside server folder:
-- npm init -y   (add new package.json)
-- npm install 
+Inside backend folder:
+- pip install -r requirements.txt
 
 ## To compile the code:
 To load the frontend web application:
 - npm run dev
 
 To start the server:
-- node server.js
+- python server.py
 
 
