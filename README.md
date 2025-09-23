@@ -24,7 +24,8 @@ To start the server:
 ## To deploy this app onto Render.com:
 Deploy the frontend/ to static web on render.com
 Deploy the backend/ to web service on render.com
+[Youtube link](https://www.youtube.com/watch?v=hTF7VDM-n2I)
 For myself: https://dashboard.render.com/project/prj-d38tig1r0fns7388uueg
-https://www.youtube.com/watch?v=hTF7VDM-n2I
+
 
 
